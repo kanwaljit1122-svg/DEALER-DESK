@@ -163,7 +163,7 @@ function liteState(st) {
     const fin = Math.min(out, Math.max(0, expected(d) - finRec));
     return { pendCust: Math.max(0, out - fin), pendFin: fin };
   };
-  return { deals: (st.deals || []).map(d => ({
+  return { models: Array.isArray(st.models) ? st.models : undefined, deals: (st.deals || []).map(d => ({
     id: d.id, date: d.date, deliv: d.deliv || "", cust: d.cust, mob: d.mob || "", village: d.village || "", status: d.status,
     items: (d.items && d.items.length ? d.items : [{ product: d.model, qty: 1 }]).map(i => ({ product: i.product, qty: i.qty })),
     acc: d.acc || {}, paper: d.paper || {}, ...pend(d) })) };
@@ -223,6 +223,7 @@ app.put("/api/state", auth, (req, res) => {
   const { version, state } = req.body || {};
   if (!state || !["deals", "cases", "trade", "otherPays"].every(k => Array.isArray(state[k])))
     return res.status(400).json({ error: "Invalid data" });
+  if (state.models !== undefined && (!Array.isArray(state.models) || state.models.length > 3000)) return res.status(400).json({ error: "Invalid product list" });
   const data = JSON.stringify(state);
   db.exec("BEGIN IMMEDIATE");
   try {

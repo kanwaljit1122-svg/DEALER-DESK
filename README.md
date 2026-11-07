@@ -33,6 +33,9 @@ Admin: **Users** → add user → tick **Limited staff view** (it is the default
 - **Customers**: name, mobile, village and their deals. No billed, received or ledger figures.
 The server removes prices, discounts, payments, finance details and notes before sending data to these users, and refuses any change they try to save. Their accessory ticks are saved separately and the admin sees them on the deal page under "Accessories handed over".
 
+## Products list (Settings)
+Admin: **Settings** shows the product list used when entering a deal. You can add a product, edit it, hide or show it, delete it, add many at once (one per line: `Name`, `Name | Type` or `Brand | Name | Type`), and export the list to CSV. Each product has a category (Tractor shows hook, bumper and other accessories; Implement / other does not) and a unit (Nos, Kg, Gaj, Tray, Bag, or your own). A product used in a deal cannot be deleted or renamed; hide it instead. The list is saved with your data, so no code change or redeploy is needed.
+
 ## Paperwork, accessories, delivery date
 - Invoice, Delivery challan and Insurance policy apply to every deal. Staff tick each when handed over.
 - "Other accessories" is an open box in the deal form (separate several with commas). Each one becomes a tick box for staff.
